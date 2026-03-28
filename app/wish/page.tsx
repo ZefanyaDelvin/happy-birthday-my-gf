@@ -4,29 +4,19 @@ import { useState, useEffect, useCallback } from "react";
 
 const slides = [
   {
-    emoji: "🎂",
+    image: "/images/1.jpg",
     title: "Make a Wish!",
-    body: "May all your candles be blown out with a single breath — and every wish come true.",
+    body: "Semoga di tahun ini semua impian dan harapanmu terwujud.",
   },
   {
-    emoji: "🌸",
+    image: "/images/2.jpg",
     title: "Bloom & Shine",
-    body: "Like the most beautiful flower in spring, may you blossom in everything you do.",
+    body: "Semoga kamu dan aku terus tumbuh, berkembang, dan bersinar bersama di umur ini.",
   },
   {
-    emoji: "🎁",
+    image: "/images/3.jpg",
     title: "You're a Gift!",
-    body: "To everyone around you — your presence is the greatest present of all.",
-  },
-  {
-    emoji: "✨",
-    title: "Sparkle On",
-    body: "May your year ahead be filled with magic, laughter, and endless bright moments.",
-  },
-  {
-    emoji: "🥂",
-    title: "Cheers to You!",
-    body: "Here's to another incredible year of being the amazing Evana that you are!",
+    body: "Semoga kamu selalu ingat kalau kamu itu hadiah terindah yang pernah aku dapat, dan aku bersyukur setiap hari untuk itu.",
   },
 ];
 
@@ -85,14 +75,10 @@ export default function Wish() {
 
   const goTo = useCallback(
     (idx: number, dir: "left" | "right") => {
-      if (sliding || idx === current) return; // Prevent clicking same dot
+      if (sliding || idx === current) return;
       setSlideDir(dir);
       setSliding(true);
-
-      // Switch the content
       setCurrent(idx);
-
-      // Reset sliding state after animation finishes
       setTimeout(() => {
         setSliding(false);
       }, 400);
@@ -132,7 +118,6 @@ export default function Wish() {
           50%  { transform: translateY(50vh) rotate(180deg) translateX(18px); opacity:0.5; }
           100% { transform: translateY(105vh) rotate(360deg) translateX(-10px); opacity:0; }
         }
-        /* FIXED: Added translateX(-50%) to keep envelope centered */
         @keyframes wiggle {
           0%,100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
           20%      { transform: translateX(-50%) translateY(-6px) rotate(-2deg); }
@@ -143,13 +128,11 @@ export default function Wish() {
           0%   { transform: rotateX(0deg); }
           100% { transform: rotateX(-180deg); }
         }
-        /* FIXED: Added translateX(-50%) to keep letter centered */
         @keyframes letterRise {
           0%   { transform: translateX(-50%) translateY(0px) scale(0.95); opacity:0.3; }
           60%  { opacity:1; }
           100% { transform: translateX(-50%) translateY(-180px) scale(1); opacity:1; }
         }
-        /* FIXED: Added translateX(-50%) to keep card centered */
         @keyframes cardReveal {
           0%   { opacity:0; transform: translateX(-50%) scale(0.85) translateY(30px); }
           100% { opacity:1; transform: translateX(-50%) scale(1) translateY(0); }
@@ -170,10 +153,9 @@ export default function Wish() {
           0%,100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.5); transform: translate(-50%,-50%) scale(1); }
           50%      { box-shadow: 0 0 0 8px rgba(244,63,94,0); transform: translate(-50%,-50%) scale(1.08); }
         }
-        @keyframes heartbeat {
-          0%,100% { transform:scale(1); }
-          30%      { transform:scale(1.2); }
-          60%      { transform:scale(0.93); }
+        @keyframes imgFloat {
+          0%,100% { transform:scale(1) translateY(0); }
+          50%      { transform:scale(1.03) translateY(-3px); }
         }
         @keyframes tapHint {
           0%,100% { opacity:0.5; transform:translateY(0); }
@@ -188,7 +170,7 @@ export default function Wish() {
         .slide-right { animation: slideRight 0.35s cubic-bezier(.4,0,.2,1) both; }
         .slide-left  { animation: slideLeft  0.35s cubic-bezier(.4,0,.2,1) both; }
         .seal-pulse  { animation: sealPulse 1.8s ease-in-out infinite; }
-        .heartbeat   { animation: heartbeat 1.5s ease-in-out infinite; }
+        .img-float   { animation: imgFloat 3s ease-in-out infinite; }
         .tap-hint    { animation: tapHint 1.8s ease-in-out infinite; }
       `}</style>
 
@@ -203,7 +185,6 @@ export default function Wish() {
       >
         <Petals />
 
-        {/* BG blobs */}
         <div
           className="absolute top-[-100px] left-[-100px] w-72 h-72 rounded-full opacity-25 blur-3xl"
           style={{ background: "#f9a8d4" }}
@@ -236,7 +217,7 @@ export default function Wish() {
             </h1>
           </div>
 
-          {/* ── SCENE WRAPPER ── */}
+          {/* SCENE WRAPPER */}
           <div
             style={{
               position: "relative",
@@ -244,7 +225,7 @@ export default function Wish() {
               height: phase === "reading" ? 540 : 320,
             }}
           >
-            {/* ── LETTER CARD (rises then expands) ── */}
+            {/* LETTER CARD (rises then expands) */}
             {(phase === "opening" || phase === "risen") && (
               <div
                 className="absolute left-1/2 letter-rise z-20 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-2 px-7 py-8"
@@ -273,7 +254,7 @@ export default function Wish() {
               </div>
             )}
 
-            {/* ── FULL CARD (reading phase) ── */}
+            {/* FULL CARD (reading phase) */}
             {phase === "reading" && (
               <div
                 className="card-reveal absolute z-30"
@@ -317,11 +298,31 @@ export default function Wish() {
                   {/* Slide */}
                   <div
                     key={current}
-                    className={`flex flex-col items-center text-center gap-2 px-6 pt-6 pb-4 ${sliding ? (slideDir === "right" ? "slide-right" : "slide-left") : ""}`}
+                    className={`flex flex-col items-center text-center gap-2 px-6 pt-5 pb-4 ${sliding ? (slideDir === "right" ? "slide-right" : "slide-left") : ""}`}
                   >
-                    <div className="text-6xl heartbeat select-none">
-                      {slide.emoji}
+                    {/* Image replacing emoji */}
+                    <div
+                      className="img-float rounded-xl overflow-hidden"
+                      style={{
+                        width: 110,
+                        height: 110,
+                        flexShrink: 0,
+                        border: "2px solid #fce7f3",
+                        boxShadow: "0 4px 16px rgba(244,114,182,0.2)",
+                      }}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
+                      />
                     </div>
+
                     <h2
                       className="mt-1"
                       style={{
@@ -401,13 +402,12 @@ export default function Wish() {
               </div>
             )}
 
-            {/* ── ENVELOPE ── */}
+            {/* ENVELOPE */}
             <div
               className={`absolute bottom-0 left-1/2 z-10 ${phase === "idle" ? "env-idle" : ""}`}
               style={{ width: 300, height: 200, transform: "translateX(-50%)" }}
               onClick={openEnvelope}
             >
-              {/* Body */}
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
@@ -416,8 +416,6 @@ export default function Wish() {
                   boxShadow: "0 20px 60px rgba(244,114,182,0.3)",
                 }}
               />
-
-              {/* Bottom V fold */}
               <svg
                 className="absolute bottom-0 left-0"
                 width="300"
@@ -431,8 +429,6 @@ export default function Wish() {
                   opacity="0.55"
                 />
               </svg>
-
-              {/* Side left fold */}
               <svg
                 className="absolute top-0 left-0"
                 width="150"
@@ -445,7 +441,6 @@ export default function Wish() {
                   opacity="0.35"
                 />
               </svg>
-              {/* Side right fold */}
               <svg
                 className="absolute top-0 right-0"
                 width="150"
@@ -458,8 +453,6 @@ export default function Wish() {
                   opacity="0.35"
                 />
               </svg>
-
-              {/* Top flap (lid) */}
               <div
                 className={`absolute top-0 left-0 right-0 z-20 ${isOpen ? "lid-flip" : ""}`}
                 style={{
@@ -479,8 +472,6 @@ export default function Wish() {
                   </defs>
                 </svg>
               </div>
-
-              {/* Wax seal */}
               {phase === "idle" && (
                 <div
                   className="seal-pulse absolute z-30 flex items-center justify-center rounded-full"
@@ -503,7 +494,6 @@ export default function Wish() {
             </div>
           </div>
 
-          {/* Tap hint */}
           {phase === "idle" && (
             <p className="tap-hint mt-4 text-rose-400 text-xs tracking-widest uppercase">
               tap to open ✦
