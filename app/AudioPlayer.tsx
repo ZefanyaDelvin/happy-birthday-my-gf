@@ -7,6 +7,8 @@ export default function AudioPlayer() {
   const [muted, setMuted] = useState(false);
 
   useEffect(() => {
+    if (audioRef.current) return; // already initialized
+
     const audio = new Audio("/music/bg.mp3");
     audio.loop = true;
     audio.volume = 0.4;
@@ -19,10 +21,7 @@ export default function AudioPlayer() {
     };
 
     tryPlay();
-
-    return () => {
-      audio.pause();
-    };
+    // No cleanup — we want it to keep playing across pages
   }, []);
 
   const toggleMute = () => {

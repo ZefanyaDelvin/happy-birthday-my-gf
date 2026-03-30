@@ -18,6 +18,11 @@ const slides = [
     title: "You're a Gift!",
     body: "Semoga kamu selalu ingat kalau kamu itu hadiah terindah yang pernah aku dapat, dan aku bersyukur setiap hari untuk itu.",
   },
+  {
+    image: "/images/4.jpg",
+    title: "I Love you so much sayangku cintaku sengku",
+    body: "I wish that every day feels as special as today, because you deserve all the happiness in the world. Happy birthday, my love! 💖",
+  },
 ];
 
 function Petals() {
