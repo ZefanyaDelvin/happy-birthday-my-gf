@@ -4,22 +4,22 @@ import { useState, useEffect, useCallback } from "react";
 
 const slides = [
   {
-    image: "/images/1.jpg",
+    image: "/images/1.jpeg",
     title: "Make a Wish!",
     body: "Semoga di tahun ini semua impian dan harapanmu terwujud.",
   },
   {
-    image: "/images/2.jpg",
+    image: "/images/2.jpeg",
     title: "Bloom & Shine",
     body: "Semoga kamu dan aku terus tumbuh, berkembang, dan bersinar bersama di umur ini.",
   },
   {
-    image: "/images/3.jpg",
+    image: "/images/3.jpeg",
     title: "You're a Gift!",
     body: "Semoga kamu selalu ingat kalau kamu itu hadiah terindah yang pernah aku dapat, dan aku bersyukur setiap hari untuk itu.",
   },
   {
-    image: "/images/4.jpg",
+    image: "/images/4.jpeg",
     title: "I Love you so much sayangku cintaku sengku",
     body: "I wish that every day feels as special as today, because you deserve all the happiness in the world. Happy birthday, my love! 💖",
   },
